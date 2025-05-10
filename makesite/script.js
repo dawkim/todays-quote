@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.querySelector('.image-idea p').textContent = '이미지 컨셉: ' + todaysQuote.image_idea;
                 document.querySelector('.short-thought p').textContent = '짧은 생각/해설: ' + todaysQuote.short_thought;
                 document.querySelector('.suggested-action p').textContent = '추천 행동: ' + todaysQuote.suggested_action;
+
+                console.log('quotes:', quotes); // JSON 데이터 확인
+                console.log('todaysQuote:', todaysQuote); // 선택된 명언 확인
             })
             .catch(error => console.error('Error loading quotes:', error));
     }
