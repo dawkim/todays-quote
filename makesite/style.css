@@ -5,89 +5,117 @@
     font-style: normal;
 }
 
-body {
-    font-family: 'LINESeedKR-Bd', sans-serif; /* 기본 글꼴 변경 */
+html, body {
+    height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9; /* 밝은 배경색 */
-    color: #222; /* 어두운 글자색 */
-    line-height: 1.6;
+    overflow: hidden; /* 전체 페이지 스크롤 비활성화 */
+    font-family: 'LINESeedKR-Bd', sans-serif;
+    background-color: #fefefe;
+    color: #333;
+    line-height: 1.7;
+    font-size: 18px; /* 전체 글자 크기 키움 */
 }
 
-.container {
-    width: 85%; /* 너비 조정 */
-    max-width: 800px; /* 최대 너비 설정 */
-    margin: 50px auto; /* 상하 여백 늘림 */
-    background-color: #fff;
-    padding: 40px; /* 패딩 늘림 */
-    border-radius: 12px; /* 둥근 모서리 증가 */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* 그림자 효과 조정 */
-    position: relative; /* slide-container absolute position 기준 */
+.section-container { /* 기존 .container 대신 사용 */
+    height: 100vh; /* 각 섹션이 화면 전체 높이를 차지하도록 */
+    overflow-y: scroll; /* 섹션 내부 스크롤 허용 (필요시) */
+    scroll-snap-type: y mandatory; /* Y축 스크롤 스냅 */
 }
 
-.quote-box {
-    margin-bottom: 30px; /* 여백 늘림 */
-    text-align: center; /* 가운데 정렬 */
+.section { /* .quote-box와 .slide를 대체할 공통 클래스 */
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+    box-sizing: border-box;
+    scroll-snap-align: start; /* 스크롤 시 섹션 상단에 맞춰짐 */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ad-banner {
+    display: none; /* 광고 숨김 */
+}
+
+.quote-box { /* .section 클래스로 대체 예정 */
+    /* 기존 스타일 대부분 .section으로 이동 */
+}
+
+.site-title {
+    font-size: 2.5em; /* 제목 폰트 크기 */
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 40px;
 }
 
 .quote {
-    font-family: 'LINESeedKR-Bd', serif; /* 명언 글꼴 변경 */
-    font-size: 2.2em;
+    font-size: 1.8em; /* 명언 폰트 크기 */
     font-weight: 700;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    color: #333;
+    line-height: 1.8; /* 줄 간격 조정 */
+    margin-bottom: 30px;
+    color: #222;
+    word-break: keep-all;
+    letter-spacing: 0.05em; /* 글자 사이 간격 조정 */
+    white-space: pre-line; /* \n 줄바꿈 적용 */
 }
 
 .source {
-    font-style: normal; /* 이탤릭 제거 */
-    text-align: center; /* 가운데 정렬 */
-    color: #555; /* 글자색 변경 */
-    font-size: 1.1em; /* 크기 조정 */
+    font-style: normal;
+    color: #777;
+    font-size: 0.9em; /* 출처 폰트 크기 */
 }
 
-.slide-container {
-    position: relative;
-    overflow: hidden;
-    height: 120px; /* 슬라이드 영역 높이 */
+.slide-container { /* .section-container 로 대체 예정 */
+    /* 기존 스타일 제거 또는 .section-container로 통합 */
 }
 
-.slide {
-    position: absolute;
-    bottom: -100%; /* 초기 위치 (숨김) */
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-radius: 8px;
-    transition: bottom 0.5s ease-in-out; /* 슬라이드 효과 */
-    box-sizing: border-box;
+.slide { /* .section 클래스로 대체 예정 */
+    /* 기존 스타일 대부분 .section으로 이동 */
+    background-color: #f9f9f9; /* 각 섹션 배경색 (예시) */
 }
 
-.slide.active {
-    bottom: 0; /* 활성화 시 위치 (보임) */
+.slide:nth-child(odd) { /* 홀수번째 섹션 배경색 다르게 (예시) */
+   background-color: #f0f0f0;
 }
 
 .image-idea p,
 .short-thought p,
 .suggested-action p {
-    font-size: 1.05em; /* 크기 조정 */
-    color: #444; /* 글자색 변경 */
+    font-size: 1em; /* 내용 폰트 크기 */
+    color: #444;
+    margin: 15px 0;
+    line-height: 1.7; /* 줄 간격 조정 */
+    white-space: pre-line; /* \n 줄바꿈 적용 */
 }
 
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-    .container {
-        width: 90%;
+    body {
+        font-size: 16px; /* 모바일에서 전체 글자 크기 약간 줄임 */
+    }
+    .section {
         padding: 30px;
-        margin: 30px auto;
     }
-
     .quote {
-        font-size: 1.7em;
+        font-size: 1.8em;
     }
-
-    .slide-container {
-        height: 100px; /* 슬라이드 영역 높이 */
+    .source {
+        font-size: 0.9em;
+    }
+    .image-idea p,
+    .short-thought p,
+    .suggested-action p {
+        font-size: 1em;
     }
 }
